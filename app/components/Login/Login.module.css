@@ -1,0 +1,92 @@
+.container {
+  padding: 32px;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+.formMobile {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.loginTexts {
+  display: grid;
+  gap: 8px;
+  h1 {
+    font-size: 24px;
+    line-height: 150%;
+    color: #333333;
+  }
+
+  p {
+    line-height: 150%;
+    color: #737373;
+  }
+}
+
+.formElements {
+  display: grid;
+  gap: 24px;
+
+  label {
+    display: grid;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 150%;
+    color: #333333;
+
+    input {
+      font-size: 16px;
+      color: #000;
+      outline: none;
+      padding: 13px;
+      padding-left: 44px;
+      border: 1px solid #d9d9d9;
+      border-radius: 8px;
+      background-position: 16px center;
+      background-repeat: no-repeat;
+      background-size: 16px 16px;
+    }
+  }
+}
+
+.mailInput {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3MzczNzMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tYWlsLWljb24gbHVjaWRlLW1haWwiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxNiIgeD0iMiIgeT0iNCIgcng9IjIiLz48cGF0aCBkPSJtMjIgNy04Ljk3IDUuN2ExLjk0IDEuOTQgMCAwIDEtMi4wNiAwTDIgNyIvPjwvc3ZnPg==");
+}
+
+.passwordInput {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3MzczNzMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1sb2NrLWtleWhvbGUtaWNvbiBsdWNpZGUtbG9jay1rZXlob2xlIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjE2IiByPSIxIi8+PHJlY3QgeD0iMyIgeT0iMTAiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMiIgcng9IjIiLz48cGF0aCBkPSJNNyAxMFY3YTUgNSAwIDAgMSAxMCAwdjMiLz48L3N2Zz4=");
+}
+
+.loginButton {
+  padding: 11px;
+  background-color: #633cff;
+  font-weight: 600;
+  line-height: 150%;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.signType {
+  line-height: 150%;
+  text-align: center;
+  color: #737373;
+
+  button {
+    color: #633cff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+}
+
+.passwordInfo {
+  font-size: 12px;
+  line-height: 150%;
+  color: #737373;
+}
