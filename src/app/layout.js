@@ -1,11 +1,10 @@
 import "./reset.css";
-import "./global.css";
+import "./globals.css";
 
 import { Instrument_Sans } from "next/font/google";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
 });
 
 export const metadata = {
@@ -16,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${instrumentSans.variable}`}>{children}</body>
+      <body className={`${instrumentSans.className}`}>{children}</body>
     </html>
   );
 }
