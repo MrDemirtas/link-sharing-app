@@ -1,4 +1,6 @@
 import Link from "next/link";
+import LoginForm from "@/components/login-fomr";
+import styles from "@/styles/login.module.css";
 
 export const metadata = {
   title: "Login",
@@ -7,14 +9,12 @@ export const metadata = {
 
 export default function Login() {
   return (
-    <div>
-      <h1>Login</h1>
-      <form>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button type="submit">Login</button>
-      </form>
-      <Link href="/sign-up">Sign Up</Link>
-    </div>
+    <>
+      <LoginForm />
+      <div className={styles.createAccoınt}>
+        <p>Don't have an account?</p>
+        <Link href="/sign-up">Create account</Link>
+      </div>
+    </>
   );
 }
