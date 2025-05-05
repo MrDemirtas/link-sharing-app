@@ -15,7 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${instrumentSans.className}`}>{children}</body>
+      <body className={`${instrumentSans.className}`} suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
