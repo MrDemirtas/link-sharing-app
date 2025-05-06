@@ -1,16 +1,34 @@
 "use client";
 
 import { FiKey, FiMail } from "react-icons/fi";
+import { useActionState, useEffect, useState } from "react";
 
 import { createAccount } from "@/lib/login-actions";
 import styles from "@/styles/login.module.css";
-import { useActionState } from "react";
 
 export default function LoginForm() {
   const [state, formAction, pending] = useActionState(createAccount, null);
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const isInvalidEmail = state?.error?.includes("email");
-  const isInvalidPassword = state?.error?.includes("password");
+  useEffect(() => {
+    if (state?.error?.includes("email")) {
+      setIsInvalidEmail(true);
+    } else if (state?.error?.includes("password")) {
+      setIsInvalidPassword(true);
+    }
+  }, [state]);
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -30,6 +48,8 @@ export default function LoginForm() {
               type="email"
               name="email"
               placeholder="e.g. alex@email.com"
+              value={email}
+              onChange={onChange}
             />
             {isInvalidEmail && <p>{state?.message}</p>}
           </div>
@@ -43,6 +63,8 @@ export default function LoginForm() {
               type="password"
               name="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={onChange}
             />
             {isInvalidPassword && <p>{state?.message}</p>}
           </div>
