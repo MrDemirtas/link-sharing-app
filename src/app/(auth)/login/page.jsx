@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LoginForm from "@/components/login-fomr";
+import LoginForm from "@/components/login-form";
 import styles from "@/styles/login.module.css";
 
 export const metadata = {
