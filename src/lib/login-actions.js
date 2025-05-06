@@ -1,6 +1,8 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const createAccount = async (currentState, formData) => {
   const email = formData.get("email");
@@ -34,17 +36,15 @@ export const createAccount = async (currentState, formData) => {
         error: ["email", "password"],
       };
     }
-
-    return {
-      success: true,
-      message: "Login success",
-      data,
-    };
   } catch (err) {
+    console.log(err);
     return {
       success: false,
       message: err.message,
       error: ["email", "password"],
     };
   }
+
+  revalidatePath("/", "layout");
+  redirect("/");
 };
