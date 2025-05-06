@@ -37,14 +37,28 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Kullanıcı giriş yapmamışsa, sadece login, sign-up ve auth sayfalarına erişebilir
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/sign-up") &&
     !request.nextUrl.pathname.startsWith("/auth")
   ) {
-    // no user, potentially respond by redirecting the user to the login page
+    // Kullanıcı yok, login sayfasına yönlendir
     const url = request.nextUrl.clone();
     url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Kullanıcı giriş yapmışsa, login ve sign-up sayfalarına erişimi engelle
+  if (
+    user &&
+    (request.nextUrl.pathname.startsWith("/login") ||
+     request.nextUrl.pathname.startsWith("/sign-up"))
+  ) {
+    // Kullanıcı zaten giriş yapmış, ana sayfaya yönlendir
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 
