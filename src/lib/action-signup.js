@@ -1,6 +1,6 @@
 "use server";
 
-import { supabase } from "@/supabase/supabase-client";
+import { supabase } from "@/utils/supabase/server";
 
 export default async function signUp(prevState, queryData) {
   const email = queryData.get("email");

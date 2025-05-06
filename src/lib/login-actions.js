@@ -1,5 +1,7 @@
 "use server";
 
+import { createClient } from "@/utils/supabase/server";
+
 export const createAccount = async (currentState, formData) => {
   const email = formData.get("email");
   const password = formData.get("password");
@@ -18,8 +20,31 @@ export const createAccount = async (currentState, formData) => {
     };
   }
 
-  return {
-    success: true,
-    message: "Account created",
-  };
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return {
+        success: false,
+        message: error.message,
+        error: ["email", "password"],
+      };
+    }
+
+    return {
+      success: true,
+      message: "Login success",
+      data,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: err.message,
+      error: ["email", "password"],
+    };
+  }
 };

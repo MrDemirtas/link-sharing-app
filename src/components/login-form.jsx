@@ -19,6 +19,7 @@ export default function LoginForm() {
     } else if (state?.error?.includes("password")) {
       setIsInvalidPassword(true);
     }
+    console.log(state);
   }, [state]);
 
   const onChange = (e) => {
