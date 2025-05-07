@@ -17,7 +17,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${instrumentSans.className}`} suppressHydrationWarning>
-        <Header />
         {children}
       </body>
     </html>

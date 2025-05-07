@@ -1,14 +1,9 @@
-import SignOutButton from "@/components/SignOutButton";
-import { createClient } from "@/utils/supabase/server";
+import checkUserSession from "@/utils/check-user-session";
 import { redirect } from "next/navigation";
 
-export default async function PrivatePage() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/login");
-  }
+export default async function Home() {
+  await checkUserSession();
+  redirect("/profile");
 
   return (
     <>

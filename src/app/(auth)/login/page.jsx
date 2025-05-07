@@ -1,5 +1,7 @@
 import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 import styles from "@/styles/login.module.css";
 
 export const metadata = {
@@ -7,7 +9,13 @@ export const metadata = {
   description: "Link sharing app - Login",
 };
 
-export default function Login() {
+export default async function Login() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (!error || data?.user) {
+    redirect("/");
+  }
+
   return (
     <>
       <LoginForm />
