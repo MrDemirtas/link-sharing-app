@@ -54,7 +54,7 @@ export async function updateSession(request) {
   if (
     user &&
     (request.nextUrl.pathname.startsWith("/login") ||
-     request.nextUrl.pathname.startsWith("/sign-up"))
+      request.nextUrl.pathname.startsWith("/sign-up"))
   ) {
     // Kullanıcı zaten giriş yapmış, ana sayfaya yönlendir
     const url = request.nextUrl.clone();
