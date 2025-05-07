@@ -8,7 +8,7 @@ import styles from "@/styles/header.module.css";
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Image src="/images/header-logo.svg" width={32} height={32} />
+      <Image src="/images/header-logo.svg" width={32} height={32} alt="logo" />
       <nav>
         <button className={styles.activeBtn}>
           <Link width={20} height={20} />
