@@ -1,13 +1,21 @@
 import Link from "next/link";
-import styles from '@/styles/signup.module.css'
 import SignUpForm from "@/components/SignUpForm";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import styles from "@/styles/signup.module.css";
 
 export const metadata = {
   title: "Sign Up",
   description: "Link sharing app - Sign Up",
 };
 
-export default function SignUp() {
+export default async function SignUp() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (!error || data?.user) {
+    redirect("/");
+  }
+
   return (
     <div className={styles.signupPage}>
       <div className={styles.signUpHeader}>
@@ -22,4 +30,3 @@ export default function SignUp() {
     </div>
   );
 }
-
