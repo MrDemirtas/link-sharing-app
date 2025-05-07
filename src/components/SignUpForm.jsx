@@ -37,7 +37,7 @@ export default function SignUpForm() {
           <label>Email address</label>
           <div className={`${styles.inputContainer} ${hasEmailError ? styles.inputError : ""}`}>
             <MdEmail />
-            <input onChange={setNoError} name="email" className={styles.input} type="email" placeholder="e.g. alex@email.com" />
+            <input onChange={setNoError} name="email" className={styles.input} type="email" placeholder="e.g. alex@email.com" value={email}/>
             {message?.type == "email" && <p>{message?.error}</p>}
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function SignUpForm() {
           <label>Create password</label>
           <div className={`${styles.inputContainer} ${hasPasswordError ? styles.inputError : ""}`}>
             <IoIosLock />
-            <input  onChange={setNoError} name="password" className={message?.type == "password" ? styles.input : `${styles.input} ${styles.inputError}`} type="password" placeholder="At least .8 characters" />
+            <input  onChange={setNoError} name="password" className={message?.type == "password" ? styles.input : `${styles.input} ${styles.inputError}`} type="password" placeholder="At least .8 characters" value={password}/>
             {message?.type == "password" && <p>{message?.error}</p>}
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function SignUpForm() {
           <label>Confirm password</label>
           <div className={`${styles.inputContainer} ${hasPasswordError ? styles.inputError : ""}`}>
             <IoIosLock />
-            <input onChange={setNoError} name="passwordConfirmation" className={message?.type == "password" ? styles.input : `${styles.input} ${styles.inputError}`} type="password" placeholder="At least 8 characters" />
+            <input onChange={setNoError} name="passwordConfirmation" className={message?.type == "password" ? styles.input : `${styles.input} ${styles.inputError}`} type="password" placeholder="At least 8 characters" value={password} />
             {message?.type == "password" && <p>{message?.error}</p>}
           </div>
         </div>
