@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 16px;
+  padding-left: 8px;
+  background-color: #fff;
+
+  nav {
+    display: flex;
+    align-items: center;
+
+    button {
+      padding: 11px 27px;
+      border-radius: 8px;
+      background-color: #fff;
+      border: none;
+
+      svg {
+        stroke: #737373;
+      }
+    }
+  }
+
+  button {
+    padding: 11px 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #633cff;
+
+    svg {
+      stroke: #633cff;
+    }
+  }
+}
+
+.activeBtn {
+  background-color: #efebff !important;
+  svg {
+    stroke: #633cff !important;
+  }
+}

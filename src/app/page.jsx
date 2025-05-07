@@ -12,8 +12,8 @@ export default async function PrivatePage() {
 
   return (
     <>
-      <p>Hello {data.user.email}</p>
-      <SignOutButton />
+      {/* <p>Hello {data.user.email}</p>
+      <SignOutButton /> */}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import "./reset.css";
 import "./globals.css";
 
+import Header from "@/components/Header";
 import { Instrument_Sans } from "next/font/google";
 
 const instrumentSans = Instrument_Sans({
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${instrumentSans.className}`} suppressHydrationWarning>
+        <Header />
         {children}
       </body>
     </html>
