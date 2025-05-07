@@ -1,6 +1,8 @@
 "use server";
 
-import { supabase } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default async function signUp(prevState, queryData) {
   const email = queryData.get("email");
@@ -32,6 +34,7 @@ export default async function signUp(prevState, queryData) {
   }
 
   try {
+    const supabase = await createClient();
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
@@ -40,16 +43,13 @@ export default async function signUp(prevState, queryData) {
         error: error.message,
       };
     }
-
-    return {
-      success: true,
-      error: null,
-      data,
-    };
   } catch (err) {
     return {
       success: false,
       error: err.message,
     };
   }
+
+  revalidatePath("/", "layout");
+  redirect("/");
 }
