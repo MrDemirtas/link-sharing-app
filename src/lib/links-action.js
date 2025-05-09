@@ -8,7 +8,13 @@ export default async function getPlatforms() {
 }
 
 export async function getLinks() {
-  let { data, error } = await supabase.from("links").select("*");
+  const user = await supabase.auth.getUser();
+  console.log(user.data.user.id);
+
+  let { data, error } = await supabase
+    .from("links")
+    .select("*")
+    .eq("user_id", user.data.user.id);
   return data;
 }
 
