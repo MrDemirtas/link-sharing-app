@@ -1,11 +1,11 @@
 "use client";
 
+import { Suspense, useEffect, useState } from "react";
 import getPlatforms, {
   deleteLinkAction,
   getLinks,
   insertLinks,
 } from "@/lib/action-links";
-import { useEffect, useState } from "react";
 
 import NewLink from "./NewLink";
 import styles from "@/styles/links.module.css";

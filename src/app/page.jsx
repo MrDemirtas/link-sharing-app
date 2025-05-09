@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   await checkUserSession();
-  redirect("/profile");
+  redirect("/links");
 
   return (
     <>
