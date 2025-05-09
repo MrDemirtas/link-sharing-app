@@ -1,6 +1,6 @@
 "use client";
 import styles from "@/styles/links.module.css";
-import getPlatforms from "@/lib/links-action";
+import getPlatforms from "@/lib/action-links";
 import { Link, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 

@@ -1,4 +1,6 @@
-import { createClient } from "../utils/supabase/client";
+"use server";
+
+import { createClient } from "../utils/supabase/server";
 
 const supabase = createClient();
 
@@ -9,7 +11,6 @@ export default async function getPlatforms() {
 
 export async function getLinks() {
   const user = await supabase.auth.getUser();
-  console.log(user.data.user.id);
 
   let { data, error } = await supabase
     .from("links")
@@ -27,7 +28,6 @@ export async function insertLinks(newLinks) {
     .from("links")
     .insert(newLinks)
     .select();
-  console.log(error);
 }
 
 export async function updateLinks(link) {

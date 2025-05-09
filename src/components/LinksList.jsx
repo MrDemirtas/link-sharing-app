@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import NewLink from "./NewLink";
 import styles from "@/styles/links.module.css";
-import { deleteLinkAction, getLinks, insertLinks } from "@/lib/links-action";
+import { deleteLinkAction, getLinks, insertLinks } from "@/lib/action-links";
 
 export default function LinksList() {
   const [links, setLinks] = useState([]);
