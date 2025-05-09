@@ -1,21 +1,16 @@
 "use client";
-import styles from "@/styles/links.module.css";
-import getPlatforms from "@/lib/action-links";
+
 import { Link, Menu } from "lucide-react";
-import { useEffect, useState } from "react";
 
-export default function NewLink({ link, index, deleteLink, updateLink }) {
-  const [platforms, setPlatforms] = useState([]);
+import styles from "@/styles/links.module.css";
 
-  useEffect(() => {
-    async function getData() {
-      const platformData = await getPlatforms();
-      setPlatforms(platformData);
-    }
-
-    getData();
-  }, []);
-
+export default function NewLink({
+  link,
+  index,
+  deleteLink,
+  updateLink,
+  platforms,
+}) {
   function handleInputChange(e, field) {
     const value = e.target.value;
     const updatedLink = {

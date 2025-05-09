@@ -1,19 +1,28 @@
 "use client";
+
+import getPlatforms, {
+  deleteLinkAction,
+  getLinks,
+  insertLinks,
+} from "@/lib/action-links";
 import { useEffect, useState } from "react";
+
 import NewLink from "./NewLink";
 import styles from "@/styles/links.module.css";
-import { deleteLinkAction, getLinks, insertLinks } from "@/lib/action-links";
 
 export default function LinksList() {
   const [links, setLinks] = useState([]);
   const [dbLinks, setDbLinks] = useState([]);
   const [newLinks, setNewLinks] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
 
   useEffect(() => {
     async function getData() {
       const linkData = await getLinks();
       setLinks(linkData);
       setDbLinks(linkData);
+      const platformData = await getPlatforms();
+      setPlatforms(platformData);
     }
     getData();
   }, []);
@@ -21,7 +30,7 @@ export default function LinksList() {
   function handleNewLink() {
     const newLink = {
       id: crypto.randomUUID(),
-      platform_id: "",
+      platform_id: platforms[0].id,
       url: "",
     };
     setNewLinks((prev) => [...prev, newLink]);
@@ -83,6 +92,7 @@ export default function LinksList() {
           index={index}
           deleteLink={deleteLink}
           updateLink={updateLink}
+          platforms={platforms}
         />
       ))}
       <button onClick={saveLinks} className={styles.saveBtn}>
