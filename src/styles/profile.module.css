@@ -56,9 +56,13 @@
         border-radius: 8px;
         outline: none;
       }
+    }
 
-      &:not(:last-child) {
-        margin-bottom: 12px;
+    &:nth-child(6) {
+      label {
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
       }
     }
   }

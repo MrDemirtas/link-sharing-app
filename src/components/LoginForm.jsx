@@ -3,7 +3,7 @@
 import { FiKey, FiMail } from "react-icons/fi";
 import { useActionState, useEffect, useState } from "react";
 
-import { createAccount } from "@/lib/login-actions";
+import { createAccount } from "@/lib/action-login";
 import styles from "@/styles/login.module.css";
 
 export default function LoginForm() {
