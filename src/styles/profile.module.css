@@ -10,7 +10,7 @@
     color: #333333;
   }
 
-  p {
+  p:not(.success, .error) {
     line-height: 150%;
     color: #737373;
   }
@@ -37,9 +37,10 @@
 
     img {
       margin-top: 16px;
-      margin-bottom: 24px;
       border-radius: 12px;
       cursor: pointer;
+      margin-inline: auto;
+      margin-bottom: 12px;
     }
 
     label {
@@ -71,7 +72,7 @@
     border: 1px solid #d9d9d9;
   }
 
-  button {
+  button:not(.removeAvatar) {
     background-color: #633cff;
     color: #fff;
     padding: 11px;
@@ -80,5 +81,83 @@
     border: none;
     font-weight: 600;
     line-height: 150%;
+    &:disabled {
+      background-color: #d9d9d9;
+      cursor: not-allowed;
+    }
   }
+}
+
+.removeAvatar {
+  background-color: #ff5050;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding: 11px;
+  border-radius: 8px;
+  font-weight: 600;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  justify-content: center;
+  width: 150px;
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
+
+.deleteModal {
+  position: fixed;
+  inset: 0;
+  background-color: #00000080 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteModalContent {
+  background-color: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  justify-content: center;
+}
+
+.deleteModalButtons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: end;
+  padding: 0 !important;
+  margin-top: 12px;
+  button {
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px !important;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+  }
+  button:first-child {
+    background-color: #633cff;
+  }
+  button:last-child {
+    background-color: #ff5050;
+  }
+}
+
+.success {
+  color: #008000;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+}
+
+.error {
+  color: #ff5050;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
 }

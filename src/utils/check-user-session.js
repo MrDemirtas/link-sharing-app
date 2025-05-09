@@ -8,4 +8,5 @@ export default async function checkUserSession() {
   if (error || !data?.user) {
     redirect("/login");
   }
+  return data.user;
 }

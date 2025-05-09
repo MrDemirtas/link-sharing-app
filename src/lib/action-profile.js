@@ -19,9 +19,9 @@ export const updateProfile = async (currentState, formData) => {
   if (updatedFields.avatar.size !== 0) {
     const { data, error } = await supabase.storage
       .from("avatars")
-      .upload(`${crypto.randomUUID()}.png`, updatedFields.avatar, {
+      .upload(`${userData.data.user.id}.png`, updatedFields.avatar, {
         cacheControl: "3600",
-        upsert: false,
+        upsert: true,
       });
 
     if (error) {
@@ -38,15 +38,20 @@ export const updateProfile = async (currentState, formData) => {
       data.path;
   }
 
+  const options = {
+    first_name: updatedFields.firstName,
+    last_name: updatedFields.lastName,
+    email: updatedFields.email,
+  };
+
+  updatedFields.avatar.size !== 0 && (options.img_url = img_url);
+
   const { data, error } = await supabase
     .from("profiles")
-    .update({
-      first_name: updatedFields.firstName,
-      last_name: updatedFields.lastName,
-      email: updatedFields.email,
-      img_url,
-    })
-    .eq("id", userData.data.user.id);
+    .update(options)
+    .eq("id", userData.data.user.id)
+    .select()
+    .single();
 
   if (error) {
     return {
@@ -59,5 +64,48 @@ export const updateProfile = async (currentState, formData) => {
   return {
     success: true,
     message: "Profile updated successfully",
+    data: data,
+  };
+};
+
+export const deleteAvatar = async () => {
+  const supabase = await createClient();
+  const userData = await supabase.auth.getUser();
+
+  if (!userData.data.user) {
+    return {
+      success: false,
+      message: "User not found",
+    };
+  }
+
+  const { data, error } = await supabase.storage
+    .from("avatars")
+    .remove([`${userData.data.user.id}.png`]);
+
+  if (error) {
+    return {
+      success: false,
+      message: "Error deleting avatar",
+      error: error,
+    };
+  }
+
+  const { error: errorUpdate } = await supabase
+    .from("profiles")
+    .update({ img_url: null })
+    .eq("id", userData.data.user.id);
+
+  if (errorUpdate) {
+    return {
+      success: false,
+      message: "Error updating profile",
+      error: errorUpdate,
+    };
+  }
+
+  return {
+    success: true,
+    message: "Avatar deleted successfully",
   };
 };
