@@ -1,7 +1,6 @@
 import "./reset.css";
 import "./globals.css";
 
-import Header from "@/components/Header";
 import { Instrument_Sans } from "next/font/google";
 
 const instrumentSans = Instrument_Sans({
