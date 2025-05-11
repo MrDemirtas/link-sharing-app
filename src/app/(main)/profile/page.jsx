@@ -1,3 +1,4 @@
+import LinksPreviewPhone from "@/components/LinksPreviewPhone";
 import ProfileForm from "@/components/ProfileForm";
 import checkUserSession from "@/utils/check-user-session";
 import { createClient } from "@/utils/supabase/server";
@@ -14,9 +15,14 @@ export default async function Profile() {
 
   return (
     <main className={styles.main}>
-      <h1>Profile Details</h1>
-      <p>Add your details to create a personal touch to your profile.</p>
-      <ProfileForm userData={userData} />
+      <section className={styles.linksPreview}>
+        <LinksPreviewPhone />
+      </section>
+      <section>
+        <h1>Profile Details</h1>
+        <p>Add your details to create a personal touch to your profile.</p>
+        <ProfileForm userData={userData} />
+      </section>
     </main>
   );
 }

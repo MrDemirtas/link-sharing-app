@@ -39,7 +39,7 @@ export default function ProfileForm({ userData }) {
 
   return (
     <form action={actionForm} className={styles.form}>
-      <div>
+      <div className={styles.avatarDiv}>
         <p>Profile picture</p>
         <label>
           {imgSrc.trim() ? (
@@ -74,7 +74,7 @@ export default function ProfileForm({ userData }) {
         <p>Image must be below 1024x1024px. Use PNG or JPG format.</p>
       </div>
 
-      <div>
+      <div className={styles.formInputs}>
         <label>
           First name*
           <input
