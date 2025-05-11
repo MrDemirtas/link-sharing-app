@@ -85,17 +85,36 @@ export default function LinksList() {
       <button onClick={handleNewLink} className={styles.addNewLinkBtn}>
         + Add new link
       </button>
-      {links?.map((x, index) => (
-        <NewLink
-          key={x?.id}
-          link={x}
-          index={index}
-          deleteLink={deleteLink}
-          updateLink={updateLink}
-          platforms={platforms}
-        />
-      ))}
-      <button onClick={saveLinks} className={styles.saveBtn}>
+      {links.length > 0 ? (
+        <div className={styles.linksList}>
+          {links?.map((x, index) => (
+            <NewLink
+              key={x?.id}
+              link={x}
+              index={index}
+              deleteLink={deleteLink}
+              updateLink={updateLink}
+              platforms={platforms}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className={styles.emptyListDiv}>
+          <img src="/images/links-empty.svg" />
+          <h2>Let's get you started</h2>
+          <p>
+            Use the “Add new link” button to get started. Once you have more
+            than one link, you can reorder and edit them. We’re here to help you
+            share your profiles with everyone!
+          </p>
+        </div>
+      )}
+      <hr className={styles.hr} />
+      <button
+        disabled={links.length == 0 ? true : false}
+        onClick={saveLinks}
+        className={styles.saveBtn}
+      >
         Save
       </button>
     </>
