@@ -15,9 +15,6 @@ export default async function Profile() {
 
   return (
     <main className={styles.main}>
-      <section className={styles.linksPreview}>
-        <LinksPreviewPhone />
-      </section>
       <section>
         <h1>Profile Details</h1>
         <p>Add your details to create a personal touch to your profile.</p>

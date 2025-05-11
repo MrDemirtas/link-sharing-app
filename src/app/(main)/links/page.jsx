@@ -1,16 +1,13 @@
-import checkUserSession from "@/utils/check-user-session";
-import styles from "@/styles/links.module.css";
 import LinksList from "@/components/LinksList";
 import LinksPreviewPhone from "@/components/LinksPreviewPhone";
+import checkUserSession from "@/utils/check-user-session";
+import styles from "@/styles/links.module.css";
 
 export default async function Links() {
   await checkUserSession();
 
   return (
     <div className={styles.linksPageContainer}>
-      <div className={styles.linksPreview}>
-        <LinksPreviewPhone />
-      </div>
       <div className={styles.linksPage}>
         <div className={styles.linksPageHeader}>
           <h1>Customize your links</h1>
