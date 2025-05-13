@@ -24,10 +24,12 @@ export default function ProfileForm({ userData }) {
       emailInputRef.current.value = state.data.email;
     }
 
-    if (state?.success) {
-      toast.success(state.message);
-    } else {
-      toast.error(state.message);
+    if (state) {
+      if (state?.success) {
+        toast.success(state.message);
+      } else {
+        toast.error(state.message);
+      }
     }
   }, [state]);
 
