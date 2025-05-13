@@ -37,7 +37,7 @@ export const createAccount = async (currentState, formData) => {
       };
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       success: false,
       message: err.message,

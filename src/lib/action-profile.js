@@ -2,6 +2,38 @@
 
 import { createClient } from "@/utils/supabase/server";
 
+export const getProfile = async () => {
+  const supabase = await createClient();
+  const userData = await supabase.auth.getUser();
+
+  if (!userData.data.user) {
+    return {
+      success: false,
+      message: "User not found",
+    };
+  }
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userData.data.user.id)
+    .single();
+
+  if (error) {
+    return {
+      success: false,
+      message: "Error getting profile",
+      error: error,
+    };
+  }
+
+  return {
+    success: true,
+    message: "Profile found",
+    data: data,
+  };
+};
+
 export const updateProfile = async (currentState, formData) => {
   const updatedFields = Object.fromEntries(formData);
   const supabase = await createClient();

@@ -1,8 +1,5 @@
 "use client";
-import Image from "next/image";
-import SingleLink from "./SingleLink";
-import styles from "@/styles/preview-phone.module.css";
-import Link from "next/link";
+
 import {
   ArrowRight,
   Facebook,
@@ -11,20 +8,22 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
-import { useUserContext } from "@/lib/UserProvider";
-import { useEffect } from "react";
+
+import Image from "next/image";
+import Link from "next/link";
+import SingleLink from "./SingleLink";
 import getPlatformIcon from "@/utils/get-icon";
+import styles from "@/styles/preview-phone.module.css";
+import { useEffect } from "react";
+import { useUserContext } from "@/lib/UserProvider";
 
 export default function LinksPreviewPhone({ data }) {
-  console.log(data);
-
-  useEffect(() => {}, [data]);
   return (
     <div className={styles.previewPhoneCont}>
       <div className={styles.phoneContainer}>
         <div className={styles.profileContainer}>
           <Image
-            src="https://picsum.photos/96/96"
+            src={data.img_url || "/images/user.svg"}
             alt="Your profile picture"
             height={96}
             width={96}

@@ -1,17 +1,9 @@
-import LinksPreviewPhone from "@/components/LinksPreviewPhone";
 import ProfileForm from "@/components/ProfileForm";
-import checkUserSession from "@/utils/check-user-session";
-import { createClient } from "@/utils/supabase/server";
+import { getProfile } from "@/lib/action-profile";
 import styles from "@/styles/profile.module.css";
 
 export default async function Profile() {
-  const user = await checkUserSession();
-  const supabase = await createClient();
-  const { data: userData, error } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
+  const { data: userData } = await getProfile();
 
   return (
     <main className={styles.main}>
