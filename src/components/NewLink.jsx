@@ -25,7 +25,7 @@ export default function NewLink({
       <div className={styles.linkHeader}>
         <Menu />
         <h2>Link #{index + 1}</h2>
-        <span onClick={() => deleteLink(link)}>Remove</span>
+        <button onClick={() => deleteLink(link)}>Remove</button>
       </div>
       <div>
         <h3>Platform</h3>
