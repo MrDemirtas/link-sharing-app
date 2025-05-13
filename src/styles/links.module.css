@@ -87,6 +87,7 @@
     background-color: transparent;
     border: none;
     color: var(--gray);
+    cursor: pointer;
   }
 
   svg {
