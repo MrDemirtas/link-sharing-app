@@ -6,6 +6,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import styles from "@/styles/profile.module.css";
+import { toast } from "sonner";
 
 export default function ProfileForm({ userData }) {
   const avatarInputRef = useRef(null);
@@ -21,6 +22,12 @@ export default function ProfileForm({ userData }) {
       nameInputRef.current.value = state.data.first_name;
       lastNameInputRef.current.value = state.data.last_name;
       emailInputRef.current.value = state.data.email;
+    }
+
+    if (state?.success) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
     }
   }, [state]);
 
@@ -110,8 +117,6 @@ export default function ProfileForm({ userData }) {
       <button type="submit" disabled={pending}>
         Save
       </button>
-      {state?.success && <p className={styles.success}>{state.message}</p>}
-      {state?.error && <p className={styles.error}>{state.error.message}</p>}
       {isDeleteModalOpen && (
         <DeleteAvataModal
           setIsDeleteModalOpen={setIsDeleteModalOpen}
@@ -128,6 +133,9 @@ const DeleteAvataModal = ({ setIsDeleteModalOpen, onRemoveAvatar }) => {
     if (success) {
       setIsDeleteModalOpen(false);
       onRemoveAvatar();
+      toast.success(message);
+    } else {
+      toast.error(message || error);
     }
   };
   return (

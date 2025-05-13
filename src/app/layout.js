@@ -2,6 +2,7 @@ import "./reset.css";
 import "./globals.css";
 
 import { Instrument_Sans } from "next/font/google";
+import { Toaster } from "sonner";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -17,6 +18,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${instrumentSans.className}`} suppressHydrationWarning>
         {children}
+        <Toaster
+          position="bottom-right"
+          richColors
+          expand
+          toastOptions={{
+            duration: 4000,
+          }}
+        />
       </body>
     </html>
   );
