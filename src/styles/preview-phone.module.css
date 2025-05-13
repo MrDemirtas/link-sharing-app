@@ -1,0 +1,91 @@
+.previewPhoneCont {
+  position: relative;
+}
+
+.phoneContainer {
+  position: absolute;
+  inset: 12px;
+  display: grid;
+  grid-template-rows: 1.5fr 2fr;
+  border-radius: 45px;
+  align-items: start;
+  justify-content: center;
+  grid-template-columns: 1fr;
+}
+
+.profileContainer, .linkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileContainer {
+  align-self: center;
+  gap: 25px;
+
+  img {
+    border-radius: 50%;
+    border: 4px solid #633CFF;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 14px;
+      color: #737373;
+    }
+  }
+}
+
+.linkContainer {
+  justify-content: center;
+  gap: 20px;
+  padding-inline: 24px;
+
+  a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 11px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    color: white;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 400;
+
+    svg {
+      width: 16px;
+    }
+  }
+}
+
+.github {
+  background-color: #1A1A1A;
+}
+
+.linkedin {
+  background-color: #2D68FF;
+}
+
+.youtube {
+  background-color: #EE3939;
+}
+
+.twitter {
+  background-color: #43B7E9;
+}
+
+.facebook {
+  background-color: #2442AC;
+}

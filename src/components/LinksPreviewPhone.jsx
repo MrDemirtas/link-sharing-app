@@ -1,11 +1,26 @@
+"use client";
 import Image from "next/image";
 import SingleLink from "./SingleLink";
 import styles from "@/styles/preview-phone.module.css";
 import Link from "next/link";
+import {
+  ArrowRight,
+  Facebook,
+  Github,
+  Linkedin,
+  Twitter,
+  Youtube,
+} from "lucide-react";
+import { useUserContext } from "@/lib/UserProvider";
+import { useEffect } from "react";
+import getPlatformIcon from "@/utils/get-icon";
 
-export default function LinksPreviewPhone() {
+export default function LinksPreviewPhone({ data }) {
+  console.log(data);
+
+  useEffect(() => {}, [data]);
   return (
-    <>
+    <div className={styles.previewPhoneCont}>
       <div className={styles.phoneContainer}>
         <div className={styles.profileContainer}>
           <Image
@@ -14,13 +29,25 @@ export default function LinksPreviewPhone() {
             height={96}
             width={96}
           />
-          <h2>Name</h2>
-          <p>email</p>
+          <div>
+            <h2>
+              {data.first_name} {data.last_name}
+            </h2>
+            <p>{data.email}</p>
+          </div>
         </div>
         <div className={styles.linkContainer}>
-          <Link href="#">GitHub</Link>
-          <Link href="#">YouTube</Link>
-          <Link href="#">LinkedIn</Link>
+          {data.links.map((x, index) => (
+            <Link
+              key={index}
+              target="_blank"
+              className={styles[x.platform.name.toLowerCase()]}
+              href={x.url}
+            >
+              {getPlatformIcon(x.platform.name.toLowerCase())} {x.platform.name}
+              <ArrowRight style={{ marginLeft: "auto" }} />
+            </Link>
+          ))}
         </div>
       </div>
       <svg
@@ -51,6 +78,6 @@ export default function LinksPreviewPhone() {
           </clipPath>
         </defs>
       </svg>
-    </>
+    </div>
   );
 }

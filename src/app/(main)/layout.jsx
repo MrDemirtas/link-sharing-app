@@ -1,18 +1,27 @@
 import Header from "@/components/Header";
 import LinksPreviewPhone from "@/components/LinksPreviewPhone";
+import UserProvider from "@/lib/UserProvider";
 import styles from "@/styles/main-layout.module.css";
+import checkUserSession from "@/utils/check-user-session";
 
-export default function MainLayout({ children }) {
+export default async function MainLayout({ children }) {
+  const profileData = await checkUserSession();
+  const url = `http://localhost:3000/api/profile/${profileData.id}`;
+
+  const { data } = await fetch(url).then((r) => r.json());
+
+  console.log(data);
+
   return (
-    <>
+    <UserProvider>
       <Header />
       <div className={styles.mobile}>{children}</div>
       <div className={styles.desktop}>
         <section className={styles.linksPreview}>
-          <LinksPreviewPhone />
+          <LinksPreviewPhone data={data} />
         </section>
         {children}
       </div>
-    </>
+    </UserProvider>
   );
 }
