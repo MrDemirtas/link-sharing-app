@@ -1,21 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import getPlatforms, { getLinks } from "./action-links";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext(null);
 
-export default function UserProvider({ children }, getProfile) {
+export default function UserProvider({ children }) {
   const [userData, setUserData] = useState(null);
-  const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    async function getData() {
-      const linkData = await getLinks();
-      setLinks(linkData);
-    }
-    getData();
-  }, []);
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

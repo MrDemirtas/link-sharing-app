@@ -1,10 +1,13 @@
+import { getLinks, getPlatforms } from "@/lib/action-links";
+
 import LinksList from "@/components/LinksList";
 import checkUserSession from "@/utils/check-user-session";
 import styles from "@/styles/links.module.css";
 
 export default async function Links() {
   await checkUserSession();
-
+  const linkData = await getLinks();
+  const platformData = await getPlatforms();
   return (
     <div className={styles.linksPageContainer}>
       <div className={styles.linksPage}>
@@ -15,7 +18,7 @@ export default async function Links() {
             the world!
           </p>
         </div>
-        <LinksList />
+        <LinksList linkData={linkData} platformData={platformData} />
       </div>
     </div>
   );

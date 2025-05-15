@@ -1,16 +1,12 @@
 "use client";
 
-import getPlatforms, {
-  deleteLinkAction,
-  getLinks,
-  insertLinks,
-} from "@/lib/action-links";
+import { deleteLinkAction, insertLinks } from "@/lib/action-links";
 import { useEffect, useState } from "react";
 
 import NewLink from "./NewLink";
 import styles from "@/styles/links.module.css";
 
-export default function LinksList() {
+export default function LinksList({ linkData, platformData }) {
   const [links, setLinks] = useState([]);
   const [dbLinks, setDbLinks] = useState([]);
   const [newLinks, setNewLinks] = useState([]);
@@ -18,10 +14,8 @@ export default function LinksList() {
 
   useEffect(() => {
     async function getData() {
-      const linkData = await getLinks();
       setLinks(linkData);
       setDbLinks(linkData);
-      const platformData = await getPlatforms();
       setPlatforms(platformData);
     }
     getData();
@@ -73,10 +67,10 @@ export default function LinksList() {
     if (preparedLinks.length > 0) {
       await insertLinks(preparedLinks);
 
-      const updatedLinkData = await getLinks();
-      setDbLinks(updatedLinkData);
-      setLinks(updatedLinkData);
-      setNewLinks([]);
+      // const updatedLinkData = await getLinks();
+      // setDbLinks(updatedLinkData);
+      // setLinks(updatedLinkData);
+      // setNewLinks([]);
     }
   }
 

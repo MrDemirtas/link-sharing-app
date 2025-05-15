@@ -2,9 +2,9 @@
 
 import { createClient } from "../utils/supabase/server";
 
-export default async function getPlatforms() {
+export async function getPlatforms() {
   const supabase = await createClient();
-  let { data, error } = await supabase.from("platforms").select("*");
+  const { data, error } = await supabase.from("platforms").select("*");
   return data;
 }
 
@@ -12,7 +12,7 @@ export async function getLinks() {
   const supabase = await createClient();
   const user = await supabase.auth.getUser();
 
-  let { data, error } = await supabase
+  const { data, error } = await supabase
     .from("links")
     .select("*")
     .eq("user_id", user.data.user.id);
