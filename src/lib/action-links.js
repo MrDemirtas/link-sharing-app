@@ -39,4 +39,9 @@ export async function updateLinks(link) {
     .update({ platform_id: link.platform_id, url: link.url })
     .eq("id", link.id)
     .select();
+
+  if (error) {
+    console.error("Error:", error);
+    throw error;
+  }
 }
