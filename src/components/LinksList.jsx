@@ -69,9 +69,10 @@ export default function LinksList({ linkData, platformData }) {
     );
 
     if (newLinksToSave.length > 0) {
-      const preparedLinks = newLinksToSave.map((link) => ({
+      const preparedLinks = newLinksToSave.map((link, index) => ({
         platform_id: link.platform_id,
         url: link.url,
+        sequence: index,
       }));
 
       await insertLinks(preparedLinks);

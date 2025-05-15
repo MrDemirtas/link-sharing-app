@@ -36,7 +36,7 @@ export default function LinksPreviewPhone({ data }) {
           </div>
         </div>
         <div className={styles.linkContainer}>
-          {data.links.map((x, index) => (
+          {data.links.slice(0, 5).map((x, index) => (
             <Link
               key={index}
               target="_blank"
