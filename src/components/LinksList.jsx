@@ -1,7 +1,12 @@
 "use client";
 
-import { deleteLinkAction, insertLinks } from "@/lib/action-links";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import getPlatforms, {
+  deleteLinkAction,
+  getLinks,
+  insertLinks,
+  updateLinks,
+} from "@/lib/action-links";
 
 import NewLink from "./NewLink";
 import styles from "@/styles/links.module.css";
@@ -59,19 +64,27 @@ export default function LinksList({ linkData, platformData }) {
       (link) => !dbLinks.some((dbLink) => dbLink.id === link.id)
     );
 
-    const preparedLinks = newLinksToSave.map((link) => ({
-      platform_id: link.platform_id,
-      url: link.url,
-    }));
+    const existingLinksToUpdate = links.filter((link) =>
+      dbLinks.some((dbLink) => dbLink.id === link.id)
+    );
 
-    if (preparedLinks.length > 0) {
+    if (newLinksToSave.length > 0) {
+      const preparedLinks = newLinksToSave.map((link) => ({
+        platform_id: link.platform_id,
+        url: link.url,
+      }));
+
       await insertLinks(preparedLinks);
-
-      // const updatedLinkData = await getLinks();
-      // setDbLinks(updatedLinkData);
-      // setLinks(updatedLinkData);
-      // setNewLinks([]);
     }
+
+    for (const link of existingLinksToUpdate) {
+      await updateLinks(link);
+    }
+
+    const updatedLinkData = await getLinks();
+    setDbLinks(updatedLinkData);
+    setLinks(updatedLinkData);
+    setNewLinks([]);
   }
 
   return (
