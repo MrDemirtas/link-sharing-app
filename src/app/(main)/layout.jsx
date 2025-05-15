@@ -6,7 +6,9 @@ import styles from "@/styles/main-layout.module.css";
 
 export default async function MainLayout({ children }) {
   const profileData = await checkUserSession();
-  const url = `http://localhost:3000/api/profile/${profileData.id}`;
+  const url = `${
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  }/api/profile/${profileData.id}`;
 
   const { data } = await fetch(url).then((r) => r.json());
 
