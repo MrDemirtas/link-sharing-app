@@ -66,7 +66,7 @@ export const updateProfile = async (currentState, formData) => {
 
     img_url =
       process.env.NEXT_PUBLIC_SUPABASE_URL +
-      "storage/v1/object/public/avatars/" +
+      "/storage/v1/object/public/avatars/" +
       data.path;
   }
 

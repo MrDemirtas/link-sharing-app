@@ -6,11 +6,26 @@
   position: absolute;
   inset: 12px;
   display: grid;
-  grid-template-rows: 1.5fr 2fr;
+  grid-template-rows: max-content 1fr;
   border-radius: 45px;
   align-items: start;
   justify-content: center;
   grid-template-columns: 1fr;
+}
+
+.profileLinksCont {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  border-radius: 24px;
+  align-items: start;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  background-color: white;
+  max-width: 370px;
+  margin: auto;
+  margin-top: 72px;
+  box-shadow: 0px 0px 32px 0px #0000001A;
+
 }
 
 .profileContainer, .linkContainer {
@@ -22,6 +37,7 @@
 .profileContainer {
   align-self: center;
   gap: 25px;
+  padding-block: 50px 36px;
 
   img {
     border-radius: 50%;
@@ -51,11 +67,13 @@
   justify-content: center;
   gap: 20px;
   padding-inline: 24px;
+  padding-bottom: 50px;
 
   a {
     display: flex;
     align-items: center;
     width: 100%;
+    max-width: 237px;
     padding: 11px 16px;
     text-decoration: none;
     border-radius: 8px;
@@ -66,6 +84,15 @@
 
     svg {
       width: 16px;
+    }
+  }
+
+  .previewLink {
+    height: 56px;
+    font-size: 16px;
+
+    svg {
+      width: 20px;
     }
   }
 }

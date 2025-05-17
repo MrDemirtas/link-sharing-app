@@ -23,9 +23,9 @@ export default function Header() {
           <CircleUser width={20} height={20} />
         </Link>
       </nav>
-      <button>
+      <Link href="/preview">
         <Eye width={20} height={20} />
-      </button>
+      </Link>
     </header>
   );
 }

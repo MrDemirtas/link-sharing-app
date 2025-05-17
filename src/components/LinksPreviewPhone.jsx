@@ -1,21 +1,11 @@
 "use client";
 
-import {
-  ArrowRight,
-  Facebook,
-  Github,
-  Linkedin,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import SingleLink from "./SingleLink";
 import getPlatformIcon from "@/utils/get-icon";
 import styles from "@/styles/preview-phone.module.css";
-import { useEffect } from "react";
-import { useUserContext } from "@/lib/UserProvider";
 
 export default function LinksPreviewPhone({ data }) {
   return (
