@@ -12,7 +12,7 @@ export default async function Preview() {
 
   return (
     <>
-      <PreviewHeader />
+      <PreviewHeader slug={data.slug} />
       <ProfileLinks data={data} />
       <div className="purple-bg"></div>
     </>
