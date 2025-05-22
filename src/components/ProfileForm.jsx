@@ -13,6 +13,7 @@ export default function ProfileForm({ userData }) {
   const nameInputRef = useRef(null);
   const lastNameInputRef = useRef(null);
   const emailInputRef = useRef(null);
+  const slugRef = useRef(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [state, actionForm, pending] = useActionState(updateProfile, null);
   const [imgSrc, setImgSrc] = useState(userData.img_url || "");
@@ -22,6 +23,7 @@ export default function ProfileForm({ userData }) {
       nameInputRef.current.value = state.data.first_name;
       lastNameInputRef.current.value = state.data.last_name;
       emailInputRef.current.value = state.data.email;
+      slugRef.current.value = state.data.slug;
     }
 
     if (state) {
@@ -84,6 +86,16 @@ export default function ProfileForm({ userData }) {
       </div>
 
       <div className={styles.formInputs}>
+        <label>
+          Username*
+          <input
+            type="text"
+            name="slug"
+            ref={slugRef}
+            placeholder="Enter username"
+            defaultValue={userData.slug}
+          />
+        </label>
         <label>
           First name*
           <input

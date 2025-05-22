@@ -74,6 +74,7 @@ export const updateProfile = async (currentState, formData) => {
     first_name: updatedFields.firstName,
     last_name: updatedFields.lastName,
     email: updatedFields.email,
+    slug: updatedFields.slug,
   };
 
   updatedFields.avatar.size !== 0 && (options.img_url = img_url);

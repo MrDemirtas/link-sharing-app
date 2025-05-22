@@ -35,15 +35,20 @@ export default async function signUp(prevState, queryData) {
 
   try {
     const supabase = await createClient();
+    console.log(email, password);
+
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
+      console.log(error);
+
       return {
         success: false,
         error: error.message,
       };
     }
   } catch (err) {
+    console.log(err);
     return {
       success: false,
       error: err.message,
