@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import getPlatforms, {
   deleteLinkAction,
   getLinks,
@@ -8,23 +8,21 @@ import getPlatforms, {
   updateLinks,
 } from "@/lib/action-links";
 
-import NewLink from "./NewLink";
+import StaticLinksList from "./StaticLinksList";
+import dynamic from "next/dynamic";
 import styles from "@/styles/links.module.css";
 
-export default function LinksList({ linkData, platformData }) {
-  const [links, setLinks] = useState([]);
-  const [dbLinks, setDbLinks] = useState([]);
-  const [newLinks, setNewLinks] = useState([]);
-  const [platforms, setPlatforms] = useState([]);
+// Drag and drop bileşenini dynamic import ile yükle
+const DragAndDropWrapper = dynamic(() => import("./DragAndDropWrapper"), {
+  loading: () => <div className={styles.linksList}>Yükleniyor...</div>,
+  ssr: false, // Server-side rendering'i devre dışı bırak
+});
 
-  useEffect(() => {
-    async function getData() {
-      setLinks(linkData);
-      setDbLinks(linkData);
-      setPlatforms(platformData);
-    }
-    getData();
-  }, []);
+export default function LinksList({ linkData, platformData }) {
+  const [links, setLinks] = useState(linkData);
+  const [dbLinks, setDbLinks] = useState(linkData);
+  const [newLinks, setNewLinks] = useState([]);
+  const [platforms, setPlatforms] = useState(platformData);
 
   function handleNewLink() {
     const newLink = {
@@ -94,25 +92,31 @@ export default function LinksList({ linkData, platformData }) {
         + Add new link
       </button>
       {links.length > 0 ? (
-        <div className={styles.linksList}>
-          {links?.map((x, index) => (
-            <NewLink
-              key={x?.id}
-              link={x}
-              index={index}
+        <Suspense
+          fallback={
+            <StaticLinksList
+              links={links}
               deleteLink={deleteLink}
               updateLink={updateLink}
               platforms={platforms}
             />
-          ))}
-        </div>
+          }
+        >
+          <DragAndDropWrapper
+            links={links}
+            setLinks={setLinks}
+            deleteLink={deleteLink}
+            updateLink={updateLink}
+            platforms={platforms}
+          />
+        </Suspense>
       ) : (
         <div className={styles.emptyListDiv}>
           <img src="/images/links-empty.svg" />
           <h2>Let's get you started</h2>
           <p>
-            Use the “Add new link” button to get started. Once you have more
-            than one link, you can reorder and edit them. We’re here to help you
+            Use the "Add new link" button to get started. Once you have more
+            than one link, you can reorder and edit them. We're here to help you
             share your profiles with everyone!
           </p>
         </div>

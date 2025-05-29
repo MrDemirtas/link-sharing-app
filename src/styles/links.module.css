@@ -87,6 +87,11 @@
   }
 }
 
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
 .inputContainer {
   height: 48px;
   display: flex;

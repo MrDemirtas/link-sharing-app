@@ -2,7 +2,9 @@
 
 import { Link, Menu } from "lucide-react";
 
+import { CSS } from "@dnd-kit/utilities";
 import styles from "@/styles/links.module.css";
+import { useSortable } from "@dnd-kit/sortable";
 
 export default function NewLink({
   link,
@@ -10,7 +12,14 @@ export default function NewLink({
   deleteLink,
   updateLink,
   platforms,
+  isDragDisabled = false,
 }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: link?.id,
+      disabled: isDragDisabled,
+    });
+
   function handleInputChange(e, field) {
     const value = e.target.value;
     const updatedLink = {
@@ -20,10 +29,23 @@ export default function NewLink({
     updateLink(updatedLink);
   }
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  // Drag disabled durumunda attributes ve listeners'ı kullanma
+  const dragProps = isDragDisabled ? {} : { ...attributes, ...listeners };
+
   return (
-    <div className={styles.newLinkSection}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...dragProps}
+      className={styles.newLinkSection}
+    >
       <div className={styles.linkHeader}>
-        <Menu />
+        <Menu className={isDragDisabled ? styles.disabled : ""} />
         <h2>Link #{index + 1}</h2>
         <button onClick={() => deleteLink(link)}>Remove</button>
       </div>
