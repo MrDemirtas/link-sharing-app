@@ -1,4 +1,5 @@
 import ProfileLinks from "@/components/ProfileLinks";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }) {
   const { slug } = await params;
@@ -7,6 +8,9 @@ export default async function Page({ params }) {
   }/api/profile/${slug}`;
 
   const { data } = await fetch(url).then((r) => r.json());
+  if (!data) {
+    notFound();
+  }
 
   return (
     <>
