@@ -1,0 +1,159 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--lightestGray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 0 32px rgba(99, 60, 255, 0.08);
+}
+
+.iconWrapper {
+  margin-bottom: 24px;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  stroke: var(--purple);
+  margin: 0 auto;
+}
+
+.textContent {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--purple);
+  margin: 0 0 8px 0;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--dGray);
+  margin: 0 0 16px 0;
+}
+
+.description {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.homeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--purple);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.homeButton:hover {
+  background-color: #5232e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(99, 60, 255, 0.3);
+}
+
+.linksButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--purple);
+  padding: 12px 24px;
+  border: 1px solid var(--purple);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.linksButton:hover {
+  background-color: var(--lilac);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media screen and (min-width: 768px) {
+  .content {
+    padding: 48px 40px;
+  }
+
+  .title {
+    font-size: 96px;
+  }
+
+  .subtitle {
+    font-size: 40px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .homeButton,
+  .linksButton {
+    min-width: 160px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.iconWrapper {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.textContent {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.actions {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
