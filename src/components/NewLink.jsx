@@ -38,14 +38,16 @@ export default function NewLink({
   const dragProps = isDragDisabled ? {} : { ...attributes, ...listeners };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...dragProps}
-      className={styles.newLinkSection}
-    >
+    <div ref={setNodeRef} style={style} className={styles.newLinkSection}>
       <div className={styles.linkHeader}>
-        <Menu className={isDragDisabled ? styles.disabled : ""} />
+        <Menu
+          className={isDragDisabled ? styles.disabled : ""}
+          style={{
+            cursor: isDragDisabled ? "not-allowed" : "grab",
+            outline: "none",
+          }}
+          {...dragProps}
+        />
         <h2>Link #{index + 1}</h2>
         <button onClick={() => deleteLink(link)}>Remove</button>
       </div>

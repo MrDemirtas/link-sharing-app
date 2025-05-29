@@ -11,11 +11,11 @@ export default function StaticLinksList({
 }) {
   return (
     <div className={styles.linksList}>
-      {links?.map((x) => (
+      {links?.map((x, index) => (
         <NewLink
-          key={x.id}
+          key={index}
           link={x}
-          index={x.sequence}
+          index={index}
           deleteLink={deleteLink}
           updateLink={updateLink}
           platforms={platforms}

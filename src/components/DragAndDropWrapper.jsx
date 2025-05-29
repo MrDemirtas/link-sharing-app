@@ -39,10 +39,11 @@ export default function DragAndDropWrapper({
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
         const newItems = arrayMove(items, oldIndex, newIndex);
-        return newItems.map((item, index) => ({
+        const data = newItems.map((item, index) => ({
           ...item,
           sequence: index,
         }));
+        return data;
       });
     }
   }
@@ -55,15 +56,16 @@ export default function DragAndDropWrapper({
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={links} strategy={verticalListSortingStrategy}>
-          {links?.map((x) => (
+          {links?.map((x, index) => (
             <NewLink
-              key={x.id}
+              key={index}
               link={x}
-              index={x.sequence}
+              index={index}
               deleteLink={deleteLink}
               updateLink={updateLink}
               platforms={platforms}
               isDragDisabled={false}
+              handle={true}
             />
           ))}
         </SortableContext>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useActionState, useState } from "react";
 import getPlatforms, {
   deleteLinkAction,
   getLinks,
@@ -23,12 +23,11 @@ export default function LinksList({ linkData, platformData }) {
   const [dbLinks, setDbLinks] = useState(linkData);
   const [newLinks, setNewLinks] = useState([]);
   const [platforms, setPlatforms] = useState(platformData);
-
   function handleNewLink() {
     const newLink = {
-      id: crypto.randomUUID(),
       platform_id: platforms[0].id,
       url: "",
+      sequence: links.length,
     };
     setNewLinks((prev) => [...prev, newLink]);
     setLinks((prev) => [...prev, newLink]);
@@ -58,27 +57,16 @@ export default function LinksList({ linkData, platformData }) {
   }
 
   async function saveLinks() {
-    const newLinksToSave = links.filter(
-      (link) => !dbLinks.some((dbLink) => dbLink.id === link.id)
-    );
-
-    const existingLinksToUpdate = links.filter((link) =>
-      dbLinks.some((dbLink) => dbLink.id === link.id)
-    );
-
-    if (newLinksToSave.length > 0) {
-      const preparedLinks = newLinksToSave.map((link, index) => ({
-        platform_id: link.platform_id,
-        url: link.url,
-        sequence: index,
-      }));
-
-      await insertLinks(preparedLinks);
-    }
-
-    for (const link of existingLinksToUpdate) {
-      await updateLinks(link);
-    }
+    const options = links.map((x) => {
+      const data = {
+        platform_id: x.platform_id,
+        url: x.url,
+        sequence: x.sequence,
+      };
+      x.id && (data.id = x.id);
+      return data;
+    });
+    await updateLinks(options);
 
     const updatedLinkData = await getLinks();
     setDbLinks(updatedLinkData);

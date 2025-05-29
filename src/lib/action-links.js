@@ -15,7 +15,8 @@ export async function getLinks() {
   const { data, error } = await supabase
     .from("links")
     .select("*")
-    .eq("user_id", user.data.user.id);
+    .eq("user_id", user.data.user.id)
+    .order("sequence", { ascending: true });
   return data;
 }
 
@@ -32,12 +33,14 @@ export async function insertLinks(newLinks) {
     .select();
 }
 
-export async function updateLinks(link) {
+export async function updateLinks(links) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("links")
-    .update({ platform_id: link.platform_id, url: link.url })
-    .eq("id", link.id)
+    .upsert(links, {
+      onConflict: "id",
+      defaultToNull: false,
+    })
     .select();
 
   if (error) {
