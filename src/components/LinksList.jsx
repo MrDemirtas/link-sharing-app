@@ -11,6 +11,7 @@ import getPlatforms, {
 import StaticLinksList from "./StaticLinksList";
 import dynamic from "next/dynamic";
 import styles from "@/styles/links.module.css";
+import { useUserContext } from "@/lib/UserProvider";
 
 // Drag and drop bileşenini dynamic import ile yükle
 const DragAndDropWrapper = dynamic(() => import("./DragAndDropWrapper"), {
@@ -23,11 +24,7 @@ export default function LinksList({ linkData, platformData }) {
   const [dbLinks, setDbLinks] = useState(linkData);
   const [newLinks, setNewLinks] = useState([]);
   const [platforms, setPlatforms] = useState(platformData);
-  const [handleDelete, setHandleDelete] = useState(false);
-
-  useEffect(() => {
-    saveLinks();
-  }, [handleDelete]);
+  const { updateLinks: updateContextLinks } = useUserContext();
 
   function handleNewLink() {
     const newLink = {
@@ -40,15 +37,19 @@ export default function LinksList({ linkData, platformData }) {
   }
 
   async function deleteLink(link) {
-    setLinks(links.filter((x) => x.id != link.id));
-    setNewLinks(newLinks.filter((x) => x.id != link.id));
+    const updatedLinks = links.filter((x) => x.id != link.id);
+    const updatedNewLinks = newLinks.filter((x) => x.id != link.id);
 
+    setLinks(updatedLinks);
+    setNewLinks(updatedNewLinks);
+
+    // Eğer link database'de varsa sil
     if (dbLinks.find((x) => x.id === link.id)) {
-      const status = await deleteLinkAction(link.id);
-      if (status.success) {
-        setHandleDelete(!handleDelete);
-      }
+      await deleteLinkAction(link.id);
     }
+
+    // Context'i hemen güncelle (silme işlemi için)
+    await refreshContextAfterSave(updatedLinks);
   }
 
   function updateLink(updatedLink) {
@@ -63,6 +64,20 @@ export default function LinksList({ linkData, platformData }) {
         )
       );
     }
+  }
+
+  async function refreshContextAfterSave(currentLinks = links) {
+    // Platform bilgilerini ekleyerek context'i güncelle
+    const linksWithPlatforms = currentLinks.map((link) => {
+      const platform = platforms.find((p) => p.id === link.platform_id);
+      return {
+        ...link,
+        platform: {
+          name: platform?.name || "",
+        },
+      };
+    });
+    updateContextLinks(linksWithPlatforms);
   }
 
   async function saveLinks() {
@@ -81,6 +96,9 @@ export default function LinksList({ linkData, platformData }) {
     setDbLinks(updatedLinkData);
     setLinks(updatedLinkData);
     setNewLinks([]);
+
+    // Context'i güncelle
+    await refreshContextAfterSave(updatedLinkData);
   }
 
   return (

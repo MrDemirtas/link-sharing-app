@@ -13,12 +13,12 @@ export default async function MainLayout({ children }) {
   const { data } = await fetch(url).then((r) => r.json());
 
   return (
-    <UserProvider>
+    <UserProvider initialData={data}>
       <Header />
       <div className={styles.mobile}>{children}</div>
       <div className={styles.desktop}>
         <section className={styles.linksPreview}>
-          <LinksPreviewPhone data={data} />
+          <LinksPreviewPhone />
         </section>
         {children}
       </div>

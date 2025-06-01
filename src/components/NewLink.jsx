@@ -7,6 +7,7 @@ import DeleteLinkModal from "./DeleteLinkModal";
 import styles from "@/styles/links.module.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { useState } from "react";
+import { useUserContext } from "@/lib/UserProvider";
 
 export default function NewLink({
   link,
@@ -14,45 +15,56 @@ export default function NewLink({
   deleteLink,
   updateLink,
   platforms,
-  isDragDisabled = false,
+  handle,
+  isDragDisabled,
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { userData, updateLinks: updateContextLinks } = useUserContext();
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: link?.id,
-      disabled: isDragDisabled,
-    });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: link.id || link.sequence || index,
+    disabled: isDragDisabled,
+  });
 
-  function handleInputChange(e, field) {
-    const value = e.target.value;
-    const updatedLink = {
-      ...link,
-      [field]: value,
-    };
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    ...(isDragging ? { zIndex: 1000, position: "relative" } : {}),
+  };
+
+  const dragProps = handle ? { ...attributes, ...listeners } : {};
+
+  const handleInputChange = (e, field) => {
+    const value =
+      field === "platform_id" ? parseInt(e.target.value) : e.target.value;
+    const updatedLink = { ...link, [field]: value };
     updateLink(updatedLink);
-  }
+
+    // Anlık context güncellemeyi kaldırdık - sadece local state güncellenecek
+  };
 
   const handleDeleteClick = () => {
     setIsDeleteModalOpen(true);
-  };
-
-  const handleConfirmDelete = async () => {
-    await deleteLink(link);
-    setIsDeleteModalOpen(false);
   };
 
   const handleCloseModal = () => {
     setIsDeleteModalOpen(false);
   };
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+  const handleConfirmDelete = () => {
+    deleteLink(link);
+    setIsDeleteModalOpen(false);
 
-  // Drag disabled durumunda attributes ve listeners'ı kullanma
-  const dragProps = isDragDisabled ? {} : { ...attributes, ...listeners };
+    // Link silme işleminde context güncellemesi gerekli değil
+    // çünkü LinksList bileşeninde saveLinks() çağrılacak
+  };
 
   return (
     <>

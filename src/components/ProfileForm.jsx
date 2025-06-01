@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import styles from "@/styles/profile.module.css";
 import { toast } from "sonner";
+import { useUserContext } from "@/lib/UserProvider";
 
 export default function ProfileForm({ userData }) {
   const avatarInputRef = useRef(null);
@@ -17,6 +18,7 @@ export default function ProfileForm({ userData }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [state, actionForm, pending] = useActionState(updateProfile, null);
   const [imgSrc, setImgSrc] = useState(userData.img_url || "");
+  const { updateProfile: updateContextProfile } = useUserContext();
 
   useEffect(() => {
     if (state?.data) {
@@ -24,6 +26,15 @@ export default function ProfileForm({ userData }) {
       lastNameInputRef.current.value = state.data.last_name;
       emailInputRef.current.value = state.data.email;
       slugRef.current.value = state.data.slug;
+
+      // Context'i güncelle
+      updateContextProfile({
+        first_name: state.data.first_name,
+        last_name: state.data.last_name,
+        email: state.data.email,
+        slug: state.data.slug,
+        img_url: state.data.img_url,
+      });
     }
 
     if (state) {
@@ -33,7 +44,7 @@ export default function ProfileForm({ userData }) {
         toast.error(state.message);
       }
     }
-  }, [state]);
+  }, [state, updateContextProfile]);
 
   const onChangeAvatar = (e) => {
     setImgSrc("");
@@ -142,12 +153,16 @@ export default function ProfileForm({ userData }) {
 }
 
 const DeleteAvataModal = ({ setIsDeleteModalOpen, onRemoveAvatar }) => {
+  const { updateProfile: updateContextProfile } = useUserContext();
+
   const onConfirm = async () => {
     const { success, message, error } = await deleteAvatar();
     if (success) {
       setIsDeleteModalOpen(false);
       onRemoveAvatar();
       toast.success(message);
+      // Avatar silindiğinde context'i güncelle
+      updateContextProfile({ img_url: null });
     } else {
       toast.error(message || error);
     }
