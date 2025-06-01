@@ -1,9 +1,11 @@
 "use client";
-import styles from "@/styles/signup.module.css";
+
+import { useActionState, useEffect, useState } from "react";
+
 import { IoIosLock } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import signUp from "@/lib/action-signup";
-import { useActionState, useEffect, useState } from "react";
+import styles from "@/styles/signup.module.css";
 
 export default function SignUpForm() {
   const [message, formAction, isPending] = useActionState(signUp, null);
@@ -26,86 +28,88 @@ export default function SignUpForm() {
     const { name, value } = e.target;
     if (name === "email") {
       setEmail(value);
+      setHasEmailError(false);
     } else if (name === "password") {
       setPassword(value);
+      setHasPasswordError(false);
     } else if (name === "passwordConfirmation") {
       setConfirmPassword(value);
+      setHasPasswordError(false);
     }
   }
 
   return (
-    <>
-      <form action={formAction} className={styles.form} autoComplete="off">
-        <div>
-          <label>Email address</label>
-          <div
-            className={`${styles.inputContainer} ${
-              hasEmailError ? styles.inputError : ""
-            }`}
-          >
-            <MdEmail />
-            <input
-              onChange={setNoError}
-              name="email"
-              className={styles.input}
-              type="email"
-              placeholder="e.g. alex@email.com"
-              value={email}
-            />
-            {message?.type == "email" && <p>{message?.error}</p>}
-          </div>
+    <form action={formAction} className={styles.form} autoComplete="off">
+      <label>
+        <span>Email address</span>
+        <div
+          className={`${styles.inputContainer} ${
+            hasEmailError ? styles.inputError : ""
+          }`}
+        >
+          <MdEmail />
+          <input
+            onChange={setNoError}
+            name="email"
+            className={styles.input}
+            type="email"
+            placeholder="e.g. alex@email.com"
+            value={email}
+            required
+          />
+          {message?.type == "email" && <p>{message?.error}</p>}
         </div>
-        <div>
-          <label>Create password</label>
-          <div
-            className={`${styles.inputContainer} ${
-              hasPasswordError ? styles.inputError : ""
-            }`}
-          >
-            <IoIosLock />
-            <input
-              onChange={setNoError}
-              name="password"
-              className={
-                message?.type == "password"
-                  ? styles.input
-                  : `${styles.input} ${styles.inputError}`
-              }
-              type="password"
-              placeholder="At least .8 characters"
-              value={password}
-            />
-            {message?.type == "password" && <p>{message?.error}</p>}
-          </div>
+      </label>
+
+      <label>
+        <span>Create password</span>
+        <div
+          className={`${styles.inputContainer} ${
+            hasPasswordError ? styles.inputError : ""
+          }`}
+        >
+          <IoIosLock />
+          <input
+            onChange={setNoError}
+            name="password"
+            className={styles.input}
+            type="password"
+            placeholder="At least 8 characters"
+            value={password}
+            required
+          />
+          {message?.type == "password" && <p>{message?.error}</p>}
         </div>
-        <div>
-          <label>Confirm password</label>
-          <div
-            className={`${styles.inputContainer} ${
-              hasPasswordError ? styles.inputError : ""
-            }`}
-          >
-            <IoIosLock />
-            <input
-              onChange={setNoError}
-              name="passwordConfirmation"
-              className={
-                message?.type == "password"
-                  ? styles.input
-                  : `${styles.input} ${styles.inputError}`
-              }
-              type="password"
-              placeholder="At least 8 characters"
-              value={confirmPassword}
-            />
-            {message?.type == "password" && <p>{message?.error}</p>}
-          </div>
+      </label>
+
+      <label>
+        <span>Confirm password</span>
+        <div
+          className={`${styles.inputContainer} ${
+            hasPasswordError ? styles.inputError : ""
+          }`}
+        >
+          <IoIosLock />
+          <input
+            onChange={setNoError}
+            name="passwordConfirmation"
+            className={styles.input}
+            type="password"
+            placeholder="At least 8 characters"
+            value={confirmPassword}
+            required
+          />
+          {message?.type == "password" && <p>{message?.error}</p>}
         </div>
-        <p>Password must contain at least 8 characters</p>
-        <button className={styles.submitBtn} type="submit">
-          Create new account
-        </button>
-      </form>
-    </>
+      </label>
+
+      <p className={styles.passwordHint}>
+        Password must contain at least 8 characters
+      </p>
+
+      <button className={styles.submitBtn} type="submit" disabled={isPending}>
+        {isPending ? "Creating account..." : "Create new account"}
+      </button>
+    </form>
   );
 }

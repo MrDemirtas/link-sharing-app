@@ -9,34 +9,146 @@
   nav {
     display: flex;
     align-items: center;
+    gap: 8px;
 
     a {
-      padding: 11px 27px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
       border-radius: 8px;
       background-color: #fff;
       border: none;
+      text-decoration: none;
+      transition: all 0.3s ease;
 
       svg {
         stroke: #737373;
+        flex-shrink: 0;
       }
     }
   }
 
-  a {
+  .rightSection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .previewBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     padding: 11px 16px;
     border-radius: 8px;
     background-color: #fff;
     border: 1px solid #633cff;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
     svg {
       stroke: #633cff;
+      flex-shrink: 0;
     }
+
+    &:hover {
+      background-color: #633cff;
+
+      svg {
+        stroke: #fff;
+      }
+
+      .linkText {
+        color: #fff;
+      }
+    }
+  }
+
+  .signOutBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #ff3939;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    svg {
+      stroke: #ff3939;
+      flex-shrink: 0;
+    }
+
+    .linkText {
+      color: #ff3939;
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: #ff3939;
+
+      svg {
+        stroke: #fff;
+      }
+
+      .linkText {
+        color: #fff;
+      }
+    }
+  }
+
+  .linkText {
+    font-size: 16px;
+    font-weight: 600;
+    color: #737373;
+    white-space: nowrap;
+    display: none;
   }
 }
 
 .activeBtn {
   background-color: #efebff !important;
+
   svg {
     stroke: #633cff !important;
+  }
+
+  .linkText {
+    color: #633cff !important;
+  }
+}
+
+/* Tablet ve üzeri ekranlar için text göster */
+@media screen and (min-width: 768px) {
+  .linkText {
+    display: inline;
+  }
+
+  .header nav a,
+  .previewBtn,
+  .signOutBtn {
+    padding: 11px 27px;
+  }
+}
+
+/* Küçük mobil ekranlar için padding ayarı */
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 12px 8px;
+  }
+
+  .rightSection {
+    gap: 4px;
+  }
+
+  .header nav {
+    gap: 4px;
+  }
+
+  .header nav a,
+  .previewBtn,
+  .signOutBtn {
+    padding: 8px 12px;
   }
 }

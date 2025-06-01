@@ -1,32 +1,38 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-
 import Image from "next/image";
 import Link from "next/link";
 import getPlatformIcon from "@/utils/get-icon";
 import styles from "@/styles/preview-phone.module.css";
+import { useUserContext } from "@/lib/UserProvider";
 
-export default function LinksPreviewPhone({ data }) {
+export default function LinksPreviewPhone() {
+  const { userData } = useUserContext();
+
+  if (!userData) {
+    return <div className={styles.previewPhoneCont}>Yükleniyor...</div>;
+  }
+
   return (
     <div className={styles.previewPhoneCont}>
       <div className={styles.phoneContainer}>
         <div className={styles.profileContainer}>
           <Image
-            src={data.img_url || "/images/user.svg"}
+            src={userData.img_url || "/images/user.svg"}
             alt="Your profile picture"
             height={96}
             width={96}
           />
           <div>
             <h2>
-              {data.first_name} {data.last_name}
+              {userData.first_name} {userData.last_name}
             </h2>
-            <p>{data.email}</p>
+            <p>{userData.email}</p>
           </div>
         </div>
         <div className={styles.linkContainer}>
-          {data.links.slice(0, 5).map((x, index) => (
+          {userData.links?.slice(0, 5).map((x, index) => (
             <Link
               key={index}
               target="_blank"

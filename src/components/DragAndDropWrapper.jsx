@@ -43,6 +43,10 @@ export default function DragAndDropWrapper({
           ...item,
           sequence: index,
         }));
+
+        // Anlık context güncellemesi kaldırıldı
+        // Sadece Save butonuna basıldığında güncellenecek
+
         return data;
       });
     }
@@ -58,7 +62,7 @@ export default function DragAndDropWrapper({
         <SortableContext items={links} strategy={verticalListSortingStrategy}>
           {links?.map((x, index) => (
             <NewLink
-              key={index}
+              key={x.id || x.sequence || index}
               link={x}
               index={index}
               deleteLink={deleteLink}

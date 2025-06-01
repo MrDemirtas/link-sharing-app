@@ -24,11 +24,11 @@
   max-width: 370px;
   margin: auto;
   margin-top: 72px;
-  box-shadow: 0px 0px 32px 0px #0000001A;
-
+  box-shadow: 0px 0px 32px 0px #0000001a;
 }
 
-.profileContainer, .linkContainer {
+.profileContainer,
+.linkContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@
 
   img {
     border-radius: 50%;
-    border: 4px solid #633CFF;
+    border: 4px solid #633cff;
   }
 
   > div {
@@ -98,21 +98,21 @@
 }
 
 .github {
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
 }
 
 .linkedin {
-  background-color: #2D68FF;
+  background-color: #2d68ff;
 }
 
 .youtube {
-  background-color: #EE3939;
+  background-color: #ee3939;
 }
 
 .twitter {
-  background-color: #43B7E9;
+  background-color: #43b7e9;
 }
 
 .facebook {
-  background-color: #2442AC;
+  background-color: #2442ac;
 }

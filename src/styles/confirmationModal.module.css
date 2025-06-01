@@ -1,0 +1,128 @@
+.modal {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  background: transparent;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  margin: auto;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalHeader {
+  text-align: center;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dGray);
+  line-height: 1.4;
+}
+
+.modalBody {
+  text-align: center;
+}
+
+.modalBody p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cancelButton,
+.confirmButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.cancelButton {
+  background-color: #f8f9fa;
+  color: var(--gray);
+  border: 1px solid var(--lGray);
+}
+
+.cancelButton:hover {
+  background-color: #e9ecef;
+  color: var(--dGray);
+}
+
+.confirmButton {
+  background-color: var(--red);
+  color: white;
+}
+
+.confirmButton:hover {
+  background-color: #e63946;
+}
+
+.confirmButton:active {
+  transform: translateY(1px);
+}
+
+.cancelButton:active {
+  transform: translateY(1px);
+}
+
+/* Tablet ve üzeri ekranlar için */
+@media screen and (min-width: 480px) {
+  .modal {
+    max-width: 420px;
+  }
+
+  .modalContent {
+    padding: 32px;
+    gap: 24px;
+  }
+
+  .modalActions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cancelButton,
+  .confirmButton {
+    flex: 1;
+  }
+}
+
+/* Büyük ekranlar için */
+@media screen and (min-width: 768px) {
+  .modalHeader h3 {
+    font-size: 22px;
+  }
+
+  .modalActions {
+    gap: 16px;
+  }
+}
