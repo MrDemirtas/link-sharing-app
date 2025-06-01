@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useActionState, useState } from "react";
+import { Suspense, useActionState, useEffect, useState } from "react";
 import getPlatforms, {
   deleteLinkAction,
   getLinks,
@@ -23,6 +23,12 @@ export default function LinksList({ linkData, platformData }) {
   const [dbLinks, setDbLinks] = useState(linkData);
   const [newLinks, setNewLinks] = useState([]);
   const [platforms, setPlatforms] = useState(platformData);
+  const [handleDelete, setHandleDelete] = useState(false);
+
+  useEffect(() => {
+    saveLinks();
+  }, [handleDelete]);
+
   function handleNewLink() {
     const newLink = {
       platform_id: platforms[0].id,
@@ -38,7 +44,10 @@ export default function LinksList({ linkData, platformData }) {
     setNewLinks(newLinks.filter((x) => x.id != link.id));
 
     if (dbLinks.find((x) => x.id === link.id)) {
-      await deleteLinkAction(link.id);
+      const status = await deleteLinkAction(link.id);
+      if (status.success) {
+        setHandleDelete(!handleDelete);
+      }
     }
   }
 
@@ -57,11 +66,11 @@ export default function LinksList({ linkData, platformData }) {
   }
 
   async function saveLinks() {
-    const options = links.map((x) => {
+    const options = links.map((x, index) => {
       const data = {
         platform_id: x.platform_id,
         url: x.url,
-        sequence: x.sequence,
+        sequence: index,
       };
       x.id && (data.id = x.id);
       return data;

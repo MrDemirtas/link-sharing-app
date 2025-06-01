@@ -23,6 +23,16 @@ export async function getLinks() {
 export async function deleteLinkAction(id) {
   const supabase = await createClient();
   const { error } = await supabase.from("links").delete().eq("id", id);
+  if (error) {
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+
+  return {
+    success: true,
+  };
 }
 
 export async function insertLinks(newLinks) {

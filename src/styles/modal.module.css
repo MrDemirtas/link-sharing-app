@@ -1,0 +1,266 @@
+/* Modal Overlay - Backdrop */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Modal Content Container */
+.modalContent {
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Modal Header */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0 24px;
+  position: relative;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #fef2f2;
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+
+.warningIcon {
+  width: 24px;
+  height: 24px;
+  stroke: #ef4444;
+  stroke-width: 2;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--gray);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background-color: var(--lightestGray);
+  color: var(--dGray);
+}
+
+.closeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Modal Body */
+.modalBody {
+  padding: 16px 24px 24px 24px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dGray);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.modalDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+.modalDescription strong {
+  color: var(--dGray);
+  font-weight: 600;
+}
+
+/* Modal Footer */
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px 24px;
+  justify-content: flex-end;
+}
+
+/* Buttons */
+.cancelButton {
+  padding: 10px 20px;
+  border: 1px solid var(--lGray);
+  background-color: transparent;
+  color: var(--dGray);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton:hover {
+  background-color: var(--lightestGray);
+  border-color: var(--gray);
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.deleteButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .modalOverlay {
+    padding: 8px;
+  }
+
+  .modalContent {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .modalHeader {
+    padding: 20px 20px 0 20px;
+  }
+
+  .modalBody {
+    padding: 12px 20px 20px 20px;
+  }
+
+  .modalFooter {
+    padding: 0 20px 20px 20px;
+    flex-direction: column;
+  }
+
+  .cancelButton,
+  .deleteButton {
+    width: 100%;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+  }
+
+  .modalDescription {
+    font-size: 14px;
+  }
+}
+
+/* Focus styles for accessibility */
+.cancelButton:focus,
+.deleteButton:focus,
+.closeButton:focus {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .modalContent {
+    border: 2px solid var(--dGray);
+  }
+
+  .warningIcon {
+    stroke-width: 3;
+  }
+}
