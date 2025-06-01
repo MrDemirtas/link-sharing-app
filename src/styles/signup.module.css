@@ -1,6 +1,8 @@
 .signupPage {
-  padding: 32px;
+  padding: 40px;
   background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.1);
 
   * {
     line-height: 150%;
@@ -8,10 +10,14 @@
 
   h1 {
     color: var(--dGray);
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
   }
 
   p {
     color: var(--gray);
+    margin: 0;
   }
 }
 
@@ -28,58 +34,85 @@
 .form {
   gap: 24px;
 
-  label,
-  p {
-    font-size: 12px;
-    color: var(--dGray);
-  }
-}
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-.input {
-  width: 100%;
-  outline: none;
-  border: none;
-  &::placeholder {
-    color: rgb(115, 115, 115, .5);
+    span,
+    p {
+      font-size: 12px;
+      color: var(--dGray);
+      font-weight: 400;
+    }
   }
-}
 
-.input:focus {
   .inputContainer {
-    border: 1px solid var(--purple) !important;
-    box-shadow: 0px 0px 32px 0px #633CFF40;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--lGray);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:focus-within {
+      border: 1px solid var(--purple);
+      box-shadow: 0px 0px 32px 0px #633cff40;
+    }
+
+    svg {
+      color: var(--gray);
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+    }
+
+    p {
+      color: var(--red);
+      font-size: 12px;
+      margin: 0;
+      white-space: nowrap;
+    }
   }
-}
 
-.inputContainer {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--lGray);
-  border-radius: 8px;
-  padding: 12px 16px;
-  gap: 10px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: var(--dGray);
+  .input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--dGray);
+    background: transparent;
 
-  svg {
-    fill: var(--gray);
+    &::placeholder {
+      color: var(--gray);
+      opacity: 0.75;
+    }
   }
 
-  p {
-    text-wrap: nowrap;
-  }
-}
+  .submitBtn {
+    padding: 11px 0;
+    border: none;
+    background-color: var(--purple);
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 
-.submitBtn {
-  background-color: var(--purple);
-  height: 46px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  border: none;
-  font-size: 16px;
+    &:hover {
+      background-color: #beadff;
+    }
+
+    &:disabled {
+      background-color: var(--purple);
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+  }
 }
 
 .loginDiv {
@@ -88,6 +121,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 24px;
+  text-align: center;
 
   a,
   p {
@@ -97,23 +131,39 @@
   a {
     color: var(--purple);
     text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #beadff;
+    }
   }
 
   p {
     color: var(--gray);
+    margin: 0 0 4px 0;
   }
 }
 
 .inputError {
-  border-color: var(--red);
+  border: 1px solid var(--red) !important;
+  box-shadow: 0px 0px 16px 0px #ff393940 !important;
 }
 
-@media screen and (min-width: 480px) {
+.passwordHint {
+  color: var(--gray);
+  font-size: 12px;
+  margin: -12px 0 0 0;
+}
+
+/* Mobil ekranlar için */
+@media screen and (max-width: 479px) {
   .signupPage {
-    width: 480px;
-    margin: auto;
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
+    padding: 24px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .signupPage h1 {
+    font-size: 24px;
   }
 }

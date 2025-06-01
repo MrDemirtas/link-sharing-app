@@ -20,7 +20,7 @@ export default async function SignUp() {
     <div className={styles.signupPage}>
       <div className={styles.signUpHeader}>
         <h1>Create account</h1>
-        <p>Let’s get you started sharing your links!</p>
+        <p>Let's get you started sharing your links!</p>
       </div>
       <SignUpForm />
       <div className={styles.loginDiv}>

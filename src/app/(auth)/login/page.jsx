@@ -17,12 +17,16 @@ export default async function Login() {
   }
 
   return (
-    <>
+    <div className={styles.loginPage}>
+      <div className={styles.loginHeader}>
+        <h1>Login</h1>
+        <p>Add your details below to get back into the app</p>
+      </div>
       <LoginForm />
-      <div className={styles.createAccoınt}>
+      <div className={styles.createAccount}>
         <p>Don't have an account?</p>
         <Link href="/sign-up">Create account</Link>
       </div>
-    </>
+    </div>
   );
 }

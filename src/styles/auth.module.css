@@ -1,0 +1,46 @@
+.authLayout {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authContainer {
+  width: 100%;
+  max-width: 476px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Mobil ekranlar için */
+@media screen and (max-width: 479px) {
+  .authLayout {
+    padding: 32px 16px;
+    align-items: flex-start;
+  }
+
+  .authContainer {
+    gap: 48px;
+  }
+}
+
+/* Tablet ve üzeri ekranlar için */
+@media screen and (min-width: 768px) {
+  .authLayout {
+    padding: 48px;
+  }
+
+  .authContainer {
+    gap: 80px;
+  }
+}
