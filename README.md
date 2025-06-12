@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔗 Link Sharing App
 
-## Getting Started
+Modern, kullanıcı dostu bir link paylaşım uygulaması. Kullanıcıların sosyal medya profillerini, web sitelerini ve diğer önemli linklerini tek bir sayfada toplayarak paylaşmalarını sağlar.
 
-First, run the development server:
+## ✨ Özellikler
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **🔐 Güvenli Kimlik Doğrulama**: Supabase ile güvenli giriş/kayıt sistemi
+- **🎨 Modern UI/UX**: Responsive ve şık tasarım
+- **📱 Mobil Uyumlu**: Tüm cihazlarda mükemmel görünüm
+- **🔀 Sürükle-Bırak**: Linkleri kolayca yeniden sırala
+- **👤 Profil Yönetimi**: Kişisel bilgileri ve profil fotoğrafını güncelle
+- **🌐 Çoklu Platform Desteği**: GitHub, LinkedIn, YouTube, Instagram ve daha fazlası
+- **👀 Canlı Önizleme**: Değişiklikleri anında gör
+- **📋 Kolay Paylaşım**: Benzersiz profil linkini paylaş
+
+## 🛠️ Teknolojiler
+
+- **Frontend**: Next.js 15, React 19
+- **Veritabanı**: Supabase
+- **Styling**: CSS Modules
+- **Sürükle-Bırak**: @dnd-kit
+- **İkonlar**: Lucide React, React Icons
+- **Bildirimler**: Sonner
+
+## 📦 Kurulum
+
+### Gereksinimler
+
+- Node.js 18+
+- npm veya yarn
+
+### Adımlar
+
+1. **Depoyu klonlayın**
+
+   ```bash
+   git clone https://github.com/kullanici-adi/link-sharing-app.git
+   cd link-sharing-app
+   ```
+
+2. **Bağımlılıkları yükleyin**
+
+   ```bash
+   npm install
+   # veya
+   yarn install
+   ```
+
+3. **Supabase projesini oluşturun**
+
+   - [Supabase](https://supabase.com) hesabı oluşturun
+   - Yeni bir proje oluşturun
+   - API anahtarlarınızı kopyalayın
+
+4. **Çevre değişkenlerini ayarlayın**
+
+   ```bash
+   # .env.local dosyası oluşturun
+   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
+
+5. **Geliştirme sunucusunu başlatın**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Tarayıcınızda açın**
+   [http://localhost:3000](http://localhost:3000) adresine gidin
+
+## 🚀 Kullanım
+
+### 1. Hesap Oluşturma
+
+- Uygulamayı açın ve "Kayıt Ol" butonuna tıklayın
+- E-posta ve şifrenizi girin
+- Hesabınızı doğrulayın
+
+### 2. Profil Düzenleme
+
+- "Profile" sekmesine gidin
+- Profil fotoğrafınızı yükleyin
+- Ad, soyad ve e-posta bilgilerinizi güncelleyin
+
+### 3. Link Ekleme
+
+- "Links" sekmesine gidin
+- "Add new link" butonuna tıklayın
+- Platform seçin ve URL'nizi girin
+- "Save" butonuna tıklayın
+
+### 4. Link Sıralama
+
+- Linkleri sürükleyip bırakarak yeniden sıralayın
+- Değişiklikler otomatik olarak kaydedilir
+
+### 5. Profil Paylaşma
+
+- "Preview" butonuna tıklayın
+- Profil linkinizi kopyalayın ve paylaşın
+
+## 📁 Proje Yapısı
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (auth)/            # Kimlik doğrulama sayfaları
+│   ├── (main)/            # Ana uygulama sayfaları
+│   │   ├── links/         # Link yönetimi
+│   │   └── profile/       # Profil yönetimi
+│   ├── (live)/            # Canlı profil görünümü
+│   └── preview/           # Önizleme sayfası
+├── components/            # React bileşenleri
+│   ├── DeleteLinkModal.jsx
+│   ├── DragAndDropWrapper.jsx
+│   ├── Header.jsx
+│   ├── LinksList.jsx
+│   ├── LoginForm.jsx
+│   ├── ProfileForm.jsx
+│   └── ...
+├── lib/                   # Yardımcı fonksiyonlar
+│   ├── action-links.js    # Link işlemleri
+│   ├── action-profile.js  # Profil işlemleri
+│   └── UserProvider.jsx   # Kullanıcı context'i
+├── styles/               # CSS stilleri
+└── utils/                # Yardımcı araçlar
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Geliştirme
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Script'ler
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev          # Geliştirme sunucusu
+npm run build        # Üretim build'i
+npm run start        # Üretim sunucusu
+npm run lint         # ESLint kontrolü
+```
