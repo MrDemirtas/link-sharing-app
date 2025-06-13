@@ -98,7 +98,7 @@ export default function ProfileForm({ userData }) {
 
       <div className={styles.formInputs}>
         <label>
-          Username*
+          Username
           <input
             type="text"
             name="slug"
@@ -108,7 +108,7 @@ export default function ProfileForm({ userData }) {
           />
         </label>
         <label>
-          First name*
+          First name
           <input
             type="text"
             name="firstName"
@@ -118,7 +118,7 @@ export default function ProfileForm({ userData }) {
           />
         </label>
         <label>
-          Last name*
+          Last name
           <input
             type="text"
             name="lastName"

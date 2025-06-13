@@ -36,12 +36,22 @@ export default function Header() {
   return (
     <>
       <header className={styles.header}>
-        <Image
-          src="/images/header-logo.svg"
-          width={32}
-          height={32}
-          alt="logo"
-        />
+        <div className={styles.logoContainer}>
+          <Image
+            src="/images/header-logo.svg"
+            width={32}
+            height={32}
+            alt="logo"
+            className={styles.mobileLogo}
+          />
+          <Image
+            src="/images/logo.svg"
+            width={182.5}
+            height={40}
+            alt="logo"
+            className={styles.tabletLogo}
+          />
+        </div>
         <nav>
           <Link href="/links" className={isLinksPage ? styles.activeBtn : ""}>
             <LinkIcon width={20} height={20} />

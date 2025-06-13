@@ -6,6 +6,20 @@
   padding-left: 8px;
   background-color: #fff;
 
+  .logoContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobileLogo {
+    display: block;
+  }
+
+  .tabletLogo {
+    display: none;
+  }
+
   nav {
     display: flex;
     align-items: center;
@@ -119,16 +133,30 @@
   }
 }
 
-/* Tablet ve üzeri ekranlar için text göster */
-@media screen and (min-width: 768px) {
-  .linkText {
-    display: inline;
+/* Desktop ve üzeri ekranlar için text göster ve logo değiştir */
+@media screen and (min-width: 1024px) {
+  .header .linkText {
+    display: inline !important;
+  }
+
+  .header nav a .linkText,
+  .previewBtn .linkText,
+  .signOutBtn .linkText {
+    display: inline !important;
   }
 
   .header nav a,
   .previewBtn,
   .signOutBtn {
     padding: 11px 27px;
+  }
+
+  .mobileLogo {
+    display: none !important;
+  }
+
+  .tabletLogo {
+    display: block !important;
   }
 }
 
