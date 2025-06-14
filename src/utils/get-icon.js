@@ -1,4 +1,12 @@
-import { Github, Linkedin, Twitter, Youtube } from "lucide-react";
+import {
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Twitch,
+  X,
+  Youtube,
+} from "lucide-react";
 
 export default function getPlatformIcon(platformName) {
   const data = [
@@ -7,16 +15,28 @@ export default function getPlatformIcon(platformName) {
       icon: <Github />,
     },
     {
-      name: "twitter",
-      icon: <Twitter />,
-    },
-    {
       name: "youtube",
       icon: <Youtube />,
     },
     {
       name: "linkedin",
       icon: <Linkedin />,
+    },
+    {
+      name: "instagram",
+      icon: <Instagram />,
+    },
+    {
+      name: "facebook",
+      icon: <Facebook />,
+    },
+    {
+      name: "x",
+      icon: <X />,
+    },
+    {
+      name: "twitch",
+      icon: <Twitch />,
     },
   ];
 

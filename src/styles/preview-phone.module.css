@@ -113,6 +113,18 @@
   background-color: #43b7e9;
 }
 
+.x {
+  background-color: #000000;
+}
+
 .facebook {
   background-color: #2442ac;
+}
+
+.instagram {
+  background-color: #e4405f;
+}
+
+.twitch {
+  background-color: #9146ff;
 }
