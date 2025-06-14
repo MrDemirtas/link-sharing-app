@@ -50,6 +50,18 @@ export default function ProfileForm({ userData }) {
     setImgSrc("");
     const file = e.target.files[0];
     if (file) {
+      // 1 MB = 1024 * 1024 bytes = 1048576 bytes
+      const maxSize = 1024 * 1024; // 1 MB
+
+      if (file.size > maxSize) {
+        toast.error(
+          "Dosya boyutu 1 MB'dan büyük olamaz. Lütfen daha küçük bir resim seçin."
+        );
+        // Input'u temizle
+        avatarInputRef.current.value = "";
+        return;
+      }
+
       setImgSrc(URL.createObjectURL(file));
     }
   };
